@@ -1,7 +1,7 @@
 # JS101
 ## Programming Foundations with JavaScript
 
-1. 	Lesson 1: Preparations
+1. 	Lesson 1: ---Nothing to push to github---
 2. 	Lesson 2: Small Programs
 3. 	Lesson 3: Practice Problems
 4. 	Lesson 4: JavaScript Collections
