@@ -1,29 +1,53 @@
-require('./calculator_msgs.json')
+require('./calculator_msgs.json');
 
 const MESSAGES = require('./calculator_msgs.json');
-const readline = require('readline-sync');
+const READLINE = require('readline-sync');
+let language = 'en';
+
+function messages(message, lang='en') {
+  return MESSAGES[lang][message];
+}
 
 function prompt(message) {
   console.log(`=> ${message}`);
+}
+
+function changeLanguage(langNum) {
+  langNum === '2' ? language = 'ru' : false
+}
+
+function retrieveLanguage() {
+  let langAnswer;
+  while(true) {
+    langAnswer = READLINE.question();
+    if (['1', '2'].includes(langAnswer)) {
+      break;
+    } else {
+      prompt(messages('validLanguage', language));
+      prompt(messages('validLanguage', "ru"));
+    }
+  }
+  changeLanguage(langAnswer);
 }
 
 function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-function retrieveAnswer() {
+function retrievePlayAgainAnswer() {
+  let playAgainAnswer
   while (true) {
-    answer = readline.question().toLocaleLowerCase();
-    if (['n', 'no'].includes(answer)) {
+    playAgainAnswer = READLINE.question().toLocaleLowerCase();
+    if (['n', 'no'].includes(playAgainAnswer)) {
       break;
-    } else if (['y', 'yes'].includes(answer)) {
+    } else if (['y', 'yes'].includes(playAgainAnswer)) {
       console.clear();
       break;
     } else {
-      prompt(MESSAGES['invalidAnswer']);
+      prompt(messages('invalidAnswer', language));
     }
   }
-  return answer;
+  return playAgainAnswer;
 }
 
 function newCalc(answer) {
@@ -32,34 +56,37 @@ function newCalc(answer) {
 
 // START
 console.clear();
-prompt(MESSAGES['welcome1']);
+prompt(messages('welcome1',  language));
+prompt(messages('welcome1',  'ru'));
+
+retrieveLanguage();
 
 // MAIN LOOP*******************************************************
 while (true) {
   // ASK FOR TWO NUMBERS
-  prompt(MESSAGES['firstNumber']);
-  let number1 = readline.question();
+  prompt(messages('firstNumber', language));
+  let number1 = READLINE.question();
 
   while (invalidNumber(number1)) {
-    prompt(MESSAGES['validNumber']);
-    number1 = readline.question();
+    prompt(messages('validNumber', language));
+    number1 = READLINE.question();
   }
 
-  prompt(MESSAGES['secondNumber']);
-  let number2 = readline.question();
+  prompt(messages('secondNumber', language));
+  let number2 = READLINE.question();
 
   while (invalidNumber(number2)) {
-    prompt(MESSAGES['validNumber']);
-    number2 = readline.question();
+    prompt(messages('validNumber', language));
+    number2 = READLINE.question();
   }
 
   // ASK FOR OPERATION
-  prompt(MESSAGES['operatorPrompt']);
-  let operation = readline.question();
+  prompt(messages('operatorPrompt', language));
+  let operation = READLINE.question();
 
   while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt(MESSAGES['validOperator']);
-    operation = readline.question();
+    prompt(messages('validOperator', language));
+    operation = READLINE.question();
   }
 
   // PERFORM OPERATION AND DISPLAY RESULTS
@@ -79,14 +106,14 @@ while (true) {
       break;
   }
   
-  prompt(MESSAGES['results'] + output);
+  prompt(messages('results', language) + output);
 
   // ASK USER TO PERFORM ANOTHER CALCULATION
-  prompt(MESSAGES['anotherCalculation']);
-  let anotherCalculation = retrieveAnswer();
+  prompt(messages('anotherCalculation', language));
+  let anotherCalculation = retrievePlayAgainAnswer();
   if (newCalc(anotherCalculation)) break;
 }
 
 console.clear();
-prompt(MESSAGES['goodbye1']);
-prompt(MESSAGES['goodbye2']);
+prompt(messages('goodbye1', language));
+prompt(messages('goodbye2', language));
