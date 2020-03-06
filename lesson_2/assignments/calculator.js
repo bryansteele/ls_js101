@@ -1,3 +1,6 @@
+require('./calculator_msgs.json')
+
+const MESSAGES = require('./calculator_msgs.json');
 const readline = require('readline-sync');
 
 function prompt(message) {
@@ -17,7 +20,7 @@ function retrieveAnswer() {
       console.clear();
       break;
     } else {
-    prompt('Invalid entry! Please enter Y/N');
+      prompt(MESSAGES['invalidAnswer']);
     }
   }
   return answer;
@@ -29,33 +32,33 @@ function newCalc(answer) {
 
 // START
 console.clear();
-prompt('Welcome to Calculator!');
+prompt(MESSAGES['welcome1']);
 
-// MAIN LOOP
+// MAIN LOOP*******************************************************
 while (true) {
   // ASK FOR TWO NUMBERS
-  prompt("What's the first number?");
+  prompt(MESSAGES['firstNumber']);
   let number1 = readline.question();
 
   while (invalidNumber(number1)) {
-    prompt ("Hmm...that doesn't look like a valid number.");
+    prompt(MESSAGES['validNumber']);
     number1 = readline.question();
   }
 
-  prompt("What's the second number?");
+  prompt(MESSAGES['secondNumber']);
   let number2 = readline.question();
 
   while (invalidNumber(number2)) {
-    prompt ("Hmm...that doesn't look like a valid number.");
+    prompt(MESSAGES['validNumber']);
     number2 = readline.question();
   }
 
   // ASK FOR OPERATION
-  prompt('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
+  prompt(MESSAGES['operatorPrompt']);
   let operation = readline.question();
 
   while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt('Must choose 1, 2, 3 or 4');
+    prompt(MESSAGES['validOperator']);
     operation = readline.question();
   }
 
@@ -75,14 +78,15 @@ while (true) {
       output = Number(number1) / Number(number2);
       break;
   }
-
-  prompt(`The result is: ${output}`);
+  
+  prompt(MESSAGES['results'] + output);
 
   // ASK USER TO PERFORM ANOTHER CALCULATION
-  prompt("Do you want to perform another calculation? (Y/N)");
+  prompt(MESSAGES['anotherCalculation']);
   let anotherCalculation = retrieveAnswer();
   if (newCalc(anotherCalculation)) break;
 }
 
 console.clear();
-prompt('Goodbye');
+prompt(MESSAGES['goodbye1']);
+prompt(MESSAGES['goodbye2']);

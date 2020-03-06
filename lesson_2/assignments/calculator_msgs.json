@@ -1,0 +1,13 @@
+{
+  "welcome1": "Welcome to Calculator!",
+  "firstNumber": "What's the first number?",
+  "secondNumber": "What's the second number?",
+  "validNumber": "Hmm... that doesn't look like a valid number",
+  "operatorPrompt": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+  "validOperator": "Must choose 1, 2, 3 or 4",
+  "results": "The result is: ",
+  "anotherCalculation": "Do you want to perform another calculation? (Y to calculate again)",
+  "invalidAnswer": "Invalid! Please enter a y/n",
+  "goodbye1": "Thank you for using the calculator,",
+  "goodbye2": "GOODBYE!"
+}
