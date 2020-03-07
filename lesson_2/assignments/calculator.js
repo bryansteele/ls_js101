@@ -53,22 +53,6 @@ function retrieveNumber(numRequested) {
   return number.toLocaleLowerCase();
 }
 
-// let number2;
-// function retrieveNumber2() {
-//   while (true) {
-//     prompt(messages('secondNumber', language));
-//     number2 = READLINE.question();
-
-//     if (invalidNumber(number2)) {
-//       prompt(messages('invalidNumber', language));
-//     } else {
-//       break;
-//     }
-//   }
-
-//   return number2.toLocaleLowerCase();
-// }
-
 function invalidOperator(operator) {
   return !['1', '2', '3', '4'].includes(operator);
 }
