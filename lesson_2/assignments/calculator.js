@@ -41,71 +41,68 @@ function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-let number1;
-function retrieveNumber1() {
-  while (true) {
-    console.clear();
-    prompt(messages('firstNumber', language));
-    number1 = READLINE.question();
-
-    if (invalidNumber(number1)) {
-      prompt(messages('invalidNumber', language));
-    } else {
-      break;
-    }
+function retrieveNumber(numRequested) {
+  console.clear();
+  prompt(messages(numRequested, language));
+  let number = READLINE.question();
+  while (invalidNumber(number)) {
+    prompt(messages('invalidNumber', language));
+    number = READLINE.question();
   }
 
-  return number1.toLocaleLowerCase();
+  return number.toLocaleLowerCase();
 }
 
-let number2;
-function retrieveNumber2() {
-  while (true) {
-    prompt(messages('secondNumber', language));
-    number2 = READLINE.question();
+// let number2;
+// function retrieveNumber2() {
+//   while (true) {
+//     prompt(messages('secondNumber', language));
+//     number2 = READLINE.question();
 
-    if (invalidNumber(number2)) {
-      prompt(messages('invalidNumber', language));
-    } else {
-      break;
-    }
-  }
+//     if (invalidNumber(number2)) {
+//       prompt(messages('invalidNumber', language));
+//     } else {
+//       break;
+//     }
+//   }
 
-  return number2.toLocaleLowerCase();
-}
+//   return number2.toLocaleLowerCase();
+// }
 
 function invalidOperator(operator) {
   return !['1', '2', '3', '4'].includes(operator);
 }
 
-let operation;
 function retrieveOperator() {
+  let operator;
   while (true) {
     prompt(messages('operatorPrompt', language));
-    operation = READLINE.question();
+    operator = READLINE.question();
 
-    if (invalidOperator(operation)) {
+    if (invalidOperator(operator)) {
       prompt(messages('invalidOperator', language));
     } else {
       break;
     }
   }
 
-  return operation;
+  return operator;
 }
 
-// let checkZero;
-// function checkZeroDivisor(num2, op) {
-//   if (/^0*$/.test(num2) && op === '4') {
-//     prompt(messages('invalidDivision', language));
-//     checkZero = true;
-//   } else {
-//     checkZero = false;
-//   }
-//   return checkZero;
-// }
+function checkZeroDivisor(num2, op) {
+  let checkZero;
+  checkZero = false;
+  if (/^0*$/.test(num2) && op === '4') {
+    console.clear();
+    prompt(messages('invalidDivision', language));
+    checkZero = true;
+  }
+
+  return checkZero;
+}
 
 function performCalculation(num1, num2, operator) {
+  let result;
   switch (operator) {
     case '1':
       result = num1 + num2;
@@ -124,12 +121,12 @@ function performCalculation(num1, num2, operator) {
   return result;
 }
 
-function displayResults(result) {
-  prompt(messages('results', language) + result + "\n");
+function displayResults(calcultaedResults) {
+  prompt(messages('results', language) + calcultaedResults + "\n");
 }
 
 function retrievePlayAgainAnswer() {
-  let playAgainAnswer
+  let playAgainAnswer;
   while (true) {
     playAgainAnswer = READLINE.question().toLocaleLowerCase();
     if (['n', 'no'].includes(playAgainAnswer)) {
@@ -158,12 +155,15 @@ retrieveLanguage();
 
 // MAIN LOOP
 while (true) {
-  retrieveNumber1();
-  retrieveNumber2();
-  retrieveOperator();
-  // checkZeroDivisor(number2, operation);
-  performCalculation(number1, number2, operation);
-  displayResults(result);
+  let number1 = retrieveNumber('firstNumber');
+  let number2 = retrieveNumber('secondNumber');
+
+  let operation = retrieveOperator();
+
+  checkZeroDivisor(number2, operation);
+
+  let results = performCalculation(number1, number2, operation);
+  displayResults(results);
 
   prompt(messages('anotherCalculation', language));
   let anotherCalculation = retrievePlayAgainAnswer();
@@ -171,5 +171,4 @@ while (true) {
 }
 
 console.clear();
-prompt(messages('goodbye1', language));
-prompt(messages('goodbye2', language));
+prompt(messages('goodbye', language));

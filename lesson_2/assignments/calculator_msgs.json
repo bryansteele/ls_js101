@@ -5,14 +5,13 @@
     "firstNumber": "What's the first number?",
     "secondNumber": "What's the second number?",
     "invalidNumber": "Hmm... that doesn't look like a valid number",
-    "operatorPrompt": "What operation would you like to perform?\n 1) Add\n 2) Subtract\n 3) Multiply\n 4) Divide",
+    "operatorPrompt": "What operation would you like to perform?\n 1) Add\n 2) Subtract\n 3) Multiply\n 4) Divide\n-------------",
     "invalidOperator": "Must choose 1, 2, 3 or 4",
-    "invalidDivision": "Error! Cannot divide by 0. Try again.\n",
     "results": "The result is: ",
+    "invalidDivision": "You chose 4) Divide. This is an Error! You cannot divide by 0.           \n                  ↓↓↓↓↓↓↓↓",
     "anotherCalculation": "Do you want to perform another calculation? (Y to calculate again)",
     "invalidAnswer": "Invalid! Please enter a y/n",
-    "goodbye1": "Thank you for using the calculator.\n",
-    "goodbye2": "GOODBYE!"
+    "goodbye": "Thank you for using the calculator.\n \n   GOODBYE!"
   },
   "ru": {
     "welcome1": "Добро пожаловать в калькулятор! Войти (1) для английского или (2) для русского:\n",
@@ -20,13 +19,12 @@
     "firstNumber": "Какой первый номер?",
     "secondNumber": "Какой второй номер?",
     "invalidNumber": "Хм ... это не похоже на действительное число",
-    "operatorPrompt": "Какую операцию вы хотели бы выполнить?\n 1) добавлять\n 2) вычитать\n 3) умножать\n 4) делить",
+    "operatorPrompt": "Какую операцию вы хотели бы выполнить?\n 1) добавлять\n 2) вычитать\n 3) умножать\n 4) делить\n-------------",
     "invalidOperator": "Нужно выбрать 1, 2, 3 или 4",
-    "invalidDivision": "Ошибка! Невозможно разделить на 0. Попробуйте еще раз.\n",
+    "invalidDivision": "Вы выбрали 4) Разделить. Ошибка! Невозможно разделить на 0.           \n              ↓↓↓↓↓↓↓↓",
     "results": "Результат: ",
     "anotherCalculation": "Хотите выполнить еще один расчет? (Y рассчитать еще раз)",
     "invalidAnswer": "Недействительным! Пожалуйста, введите y/n",
-    "goodbye1": "Спасибо за использование калькулятора.\n",
-    "goodbye2": "ДО СВИДАНИЯ!"
+    "goodbye": "Спасибо за использование калькулятора.\n \n   ДО СВИДАНИЯ!"
   }
 }
