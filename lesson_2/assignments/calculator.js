@@ -4,7 +4,7 @@ const MESSAGES = require('./calculator_msgs.json');
 const READLINE = require('readline-sync');
 let language = 'en';
 
-function messages(message, lang='en') {
+function messages(message, lang = 'en') {
   return MESSAGES[lang][message];
 }
 
@@ -13,12 +13,18 @@ function prompt(message) {
 }
 
 function changeLanguage(langNum) {
-  langNum === '2' ? language = 'ru' : false
+  if (langNum === '2') {
+    language = 'ru';
+  } else {
+    langNum = '1';
+  }
+
+  return langNum;
 }
 
 function retrieveLanguage() {
   let langAnswer;
-  while(true) {
+  while (true) {
     langAnswer = READLINE.question();
     if (['1', '2'].includes(langAnswer)) {
       break;
@@ -27,11 +33,99 @@ function retrieveLanguage() {
       prompt(messages('validLanguage', "ru"));
     }
   }
+
   changeLanguage(langAnswer);
 }
 
 function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
+}
+
+let number1;
+function retrieveNumber1() {
+  while (true) {
+    console.clear();
+    prompt(messages('firstNumber', language));
+    number1 = READLINE.question();
+
+    if (invalidNumber(number1)) {
+      prompt(messages('invalidNumber', language));
+    } else {
+      break;
+    }
+  }
+
+  return number1.toLocaleLowerCase();
+}
+
+let number2;
+function retrieveNumber2() {
+  while (true) {
+    prompt(messages('secondNumber', language));
+    number2 = READLINE.question();
+
+    if (invalidNumber(number2)) {
+      prompt(messages('invalidNumber', language));
+    } else {
+      break;
+    }
+  }
+
+  return number2.toLocaleLowerCase();
+}
+
+function invalidOperator(operator) {
+  return !['1', '2', '3', '4'].includes(operator);
+}
+
+let operation;
+function retrieveOperator() {
+  while (true) {
+    prompt(messages('operatorPrompt', language));
+    operation = READLINE.question();
+
+    if (invalidOperator(operation)) {
+      prompt(messages('invalidOperator', language));
+    } else {
+      break;
+    }
+  }
+
+  return operation;
+}
+
+// let checkZero;
+// function checkZeroDivisor(num2, op) {
+//   if (/^0*$/.test(num2) && op === '4') {
+//     prompt(messages('invalidDivision', language));
+//     checkZero = true;
+//   } else {
+//     checkZero = false;
+//   }
+//   return checkZero;
+// }
+
+function performCalculation(num1, num2, operator) {
+  switch (operator) {
+    case '1':
+      result = num1 + num2;
+      break;
+    case '2':
+      result = num1 - num2;
+      break;
+    case '3':
+      result = num1 * num2;
+      break;
+    case '4':
+      result = num1 / num2;
+      break;
+  }
+
+  return result;
+}
+
+function displayResults(result) {
+  prompt(messages('results', language) + result + "\n");
 }
 
 function retrievePlayAgainAnswer() {
@@ -47,6 +141,7 @@ function retrievePlayAgainAnswer() {
       prompt(messages('invalidAnswer', language));
     }
   }
+
   return playAgainAnswer;
 }
 
@@ -61,54 +156,15 @@ prompt(messages('welcome1',  'ru'));
 
 retrieveLanguage();
 
-// MAIN LOOP*******************************************************
+// MAIN LOOP
 while (true) {
-  // ASK FOR TWO NUMBERS
-  prompt(messages('firstNumber', language));
-  let number1 = READLINE.question();
+  retrieveNumber1();
+  retrieveNumber2();
+  retrieveOperator();
+  // checkZeroDivisor(number2, operation);
+  performCalculation(number1, number2, operation);
+  displayResults(result);
 
-  while (invalidNumber(number1)) {
-    prompt(messages('validNumber', language));
-    number1 = READLINE.question();
-  }
-
-  prompt(messages('secondNumber', language));
-  let number2 = READLINE.question();
-
-  while (invalidNumber(number2)) {
-    prompt(messages('validNumber', language));
-    number2 = READLINE.question();
-  }
-
-  // ASK FOR OPERATION
-  prompt(messages('operatorPrompt', language));
-  let operation = READLINE.question();
-
-  while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt(messages('validOperator', language));
-    operation = READLINE.question();
-  }
-
-  // PERFORM OPERATION AND DISPLAY RESULTS
-  let output;
-  switch (operation) {
-    case '1':
-      output = Number(number1) + Number(number2);
-      break;
-    case '2':
-      output = Number(number1) - Number(number2);
-      break;
-    case '3':
-      output = Number(number1) * Number(number2);
-      break;
-    case '4':
-      output = Number(number1) / Number(number2);
-      break;
-  }
-  
-  prompt(messages('results', language) + output);
-
-  // ASK USER TO PERFORM ANOTHER CALCULATION
   prompt(messages('anotherCalculation', language));
   let anotherCalculation = retrievePlayAgainAnswer();
   if (newCalc(anotherCalculation)) break;
