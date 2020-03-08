@@ -1,5 +1,5 @@
 {
-  "welcome": "Welcome to LOAN CALCULATOR!\n",
+  "welcome": "Welcome to my LOAN CALCULATOR!\n",
   "loanAmount": "What's the total amount of your loan, in U.S Dollars? (E.g. 120000.00):",
   "invalidAmount": "Invalid loan amount. Please enter your loan amount:",
   "aprRequest": "What's the annual percentage rate (APR) of your loan (%)? (E.g. 4.875):",
@@ -9,5 +9,5 @@
   "results": "Thank You!\n=> Your monthly payment will be: $",
   "anotherCalc": "Do you want to perform another calculation? (Y/N)",
   "invalidAnswer": "Invalid! Please enter a y/n",
-  "goodbye": "Thank you for using the LOAN CALCULATOR.\n   GOODBYE!!"
+  "goodbye": "Thank you for using my LOAN CALCULATOR.\n   GOODBYE!!"
 }

@@ -58,38 +58,32 @@ function displayResults(payment) {
   prompt(MESSAGES['results'] + payment);
 }
 
-function validAnswer(options) {
-  return ['y', 'yes', 'no', 'n'].includes(options);
+function retrieveCalculateAgain() {
+  prompt(MESSAGES['anotherCalc']);
+  let calculateAgainAnswer = READLINE.question().toLowerCase();
+  
+  if (['n', 'no'].includes(calculateAgainAnswer)) {
+    return;
+  } else if (['y', 'yes'].includes(calculateAgainAnswer)) {
+    console.clear();
+    return;
+  } else {
+    prompt(MESSAGES['invalidAnswer']);
+  }
+
+  return calculateAgainAnswer;
 }
 
-// function retrieveCalculateAgain() {
-//   prompt(MESSAGES['anotherCalc']);
-//   let calculateAgainAnswer = READLINE.question().toLowerCase();
-  
-//   while(!validAnswer(calculateAgainAnswer)) {
-//     prompt(MESSAGES['invalidAnswer']);
-//     calculateAgainAnswer = READLINE.question().toLowerCase();
-//   }
-
-//   return calculateAgainAnswer;
-// }
-
-// function exitCalculator(answer) {
-//   if (['no', 'n'].includes(answer)) {
-//     break;
-//   } else if (['yes', 'y'].includes(answer)) {
-//     console.clear();
-//     break;
-//   }
-// }
-  
+function exitCalculator(answer) {
+  return (!['no', 'n'].includes(answer));
+}
 
 // START
 console.clear();
 prompt(MESSAGES['welcome']);
 
 // MAIN LOOP
-do {
+while (true) {
   let loanAmount = retrieveLoanAmount();
   let apr = retrieveApr();
   let monthlyLoanDuration = retrieveMonthlyLoanDuration();
@@ -97,9 +91,9 @@ do {
 
   displayResults(monthlyPayment);
 
-  // retrieveCalculateAgain();
-  // exitCalculator(anotherCalculation);
-// } while (exitCalculator(retrieveCalculateAgain()));
+  let anotherCalculation = retrieveCalculateAgain();
+  if (exitCalculator(anotherCalculation)) break;
+}
 
 console.clear();
-prompt(messages['goodbye']);
+prompt(MESSAGES['goodbye']);
