@@ -26,6 +26,7 @@ function retrieveLanguage() {
   let langAnswer;
   while (true) {
     langAnswer = READLINE.question();
+    
     if (['1', '2'].includes(langAnswer)) {
       break;
     } else {
@@ -45,12 +46,13 @@ function retrieveNumber(numRequested) {
   console.clear();
   prompt(messages(numRequested, language));
   let number = READLINE.question();
+  
   while (invalidNumber(number)) {
     prompt(messages('invalidNumber', language));
     number = READLINE.question();
   }
 
-  return number.toLocaleLowerCase();
+  return number;
 }
 
 function invalidOperator(operator) {
@@ -76,6 +78,7 @@ function retrieveOperator() {
 function checkZeroDivisor(num2, op) {
   let checkZero;
   checkZero = false;
+  
   if (/^0*$/.test(num2) && op === '4') {
     console.clear();
     prompt(messages('invalidDivision', language));
@@ -113,6 +116,7 @@ function retrievePlayAgainAnswer() {
   let playAgainAnswer;
   while (true) {
     playAgainAnswer = READLINE.question().toLocaleLowerCase();
+    
     if (['n', 'no'].includes(playAgainAnswer)) {
       break;
     } else if (['y', 'yes'].includes(playAgainAnswer)) {
