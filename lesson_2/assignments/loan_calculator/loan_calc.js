@@ -34,31 +34,72 @@ function retrieveApr() {
 }
 
 function retrieveMonthlyLoanDuration() {
-  
+  prompt(MESSAGES['durationInMonths']);
+  let duration = READLINE.question();
+
+  while (invalidNumber(duration)) {
+    prompt(MESSAGES['invalidDuration']);
+    duration = READLINE.question();
+  }
+
+  return duration;
 }
+
+function calculatingPayment(amount, apr, months) {
+  let monthlyInterestRate = (apr / 12) / 100;
+  let payment = amount * (monthlyInterestRate / (1 - Math.pow((1 
+                        + monthlyInterestRate), (-months))));
+  
+  return payment.toFixed(2);
+}
+
+function displayResults(payment) {
+  console.clear();
+  prompt(MESSAGES['results'] + payment);
+}
+
+function validAnswer(options) {
+  return ['y', 'yes', 'no', 'n'].includes(options);
+}
+
+// function retrieveCalculateAgain() {
+//   prompt(MESSAGES['anotherCalc']);
+//   let calculateAgainAnswer = READLINE.question().toLowerCase();
+  
+//   while(!validAnswer(calculateAgainAnswer)) {
+//     prompt(MESSAGES['invalidAnswer']);
+//     calculateAgainAnswer = READLINE.question().toLowerCase();
+//   }
+
+//   return calculateAgainAnswer;
+// }
+
+// function exitCalculator(answer) {
+//   if (['no', 'n'].includes(answer)) {
+//     break;
+//   } else if (['yes', 'y'].includes(answer)) {
+//     console.clear();
+//     break;
+//   }
+// }
+  
 
 // START
 console.clear();
 prompt(MESSAGES['welcome']);
 
 // MAIN LOOP
-while (true) {
+do {
   let loanAmount = retrieveLoanAmount();
   let apr = retrieveApr();
   let monthlyLoanDuration = retrieveMonthlyLoanDuration();
-
-  console.log('Loan total: ' + loanAmount);
-  console.log('APR is: ' + apr);
-  console.log('For ' + monthlyLoanDuration + ' months');
-
   let monthlyPayment = calculatingPayment(loanAmount, apr, monthlyLoanDuration);
 
   displayResults(monthlyPayment);
 
-  prompt(MESSAGES['anotherCalc']);
-  let anotherCalculation = retrieveCalculateAgain();
-  if (newCalc(anotherCalculation)) break;
-}
+  // retrieveCalculateAgain();
+  // exitCalculator(anotherCalculation);
+// } while (exitCalculator(retrieveCalculateAgain()));
 
 console.clear();
 prompt(messages['goodbye']);
