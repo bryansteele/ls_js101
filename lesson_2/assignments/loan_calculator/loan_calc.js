@@ -5,15 +5,15 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-// function invalidNumber(number) {
-//   return number.trimStart() === '' || Number.isNaN(Number(number)) || Number(number) < 0;
-// }
+function invalidLoanAmount(numberAmount) {
+  return numberAmount.trimStart() === '' || Number.isNaN(Number(numberAmount)) || Number(numberAmount) < 0;
+  } 
 
 function retrieveLoanAmount() {
   prompt(MESSAGES['loanAmount']);
   let amount = READLINE.question();
   
-  while (invalidNumber(amount)) {
+  while (invalidLoanAmount(amount)) {
     prompt(MESSAGES['invalidAmount']);
     amount = READLINE.question();
   }
@@ -21,11 +21,15 @@ function retrieveLoanAmount() {
   return amount;
 }
 
+function invalidApr(aprNumber) {
+  return aprNumber.trimStart() === '' || Number.isNaN(Number(aprNumber)) || Number(aprNumber) < 0;
+}
+
 function retrieveApr() {
   prompt(MESSAGES['aprRequest']);
   let requestedApr = READLINE.question();
 
-  while (invalidNumber(requestedApr)) {
+  while (invalidApr(requestedApr)) {
     prompt(MESSAGES['invalidApr']);
     requestedApr = READLINE.question();
   }
@@ -33,11 +37,15 @@ function retrieveApr() {
   return requestedApr;
 }
 
+function invalidDuration(durationNumber) {
+  return durationNumber.trimStart() === '' || Number.isNaN(Number(durationNumber)) || Number(durationNumber) < 0;
+}
+
 function retrieveMonthlyLoanDuration() {
   prompt(MESSAGES['durationInMonths']);
   let duration = READLINE.question();
 
-  while (invalidNumber(duration)) {
+  while (invalidDuration(duration)) {
     prompt(MESSAGES['invalidDuration']);
     duration = READLINE.question();
   }
@@ -77,7 +85,7 @@ while (true) {
 
   displayResults(monthlyPayment);
 
-  if (retrieveCalculateAgain()) break;
+  if (!retrieveCalculateAgain()) break;
 }
 
 console.clear();
