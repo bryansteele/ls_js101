@@ -25,15 +25,15 @@ function changeLanguage(langNum) {
 }
 
 function retrieveLanguage() {
-  let langAnswer;
-  while (true) {
-    langAnswer = READLINE.question();
+  let langAnswer = READLINE.question();
 
+  while (true) {
     if (['1', '2'].includes(langAnswer)) {
       break;
     } else {
       prompt(messages('validLanguage', language));
       prompt(messages('validLanguage', "ru"));
+      langAnswer = READLINE.question();
     }
   }
 
@@ -61,13 +61,12 @@ function invalidOperator(operator) {
 }
 
 function retrieveOperator() {
-  let operator;
+  prompt(messages('operatorPrompt', language));
+  let operator = READLINE.question();
   while (true) {
-    prompt(messages('operatorPrompt', language));
-    operator = READLINE.question();
-
     if (invalidOperator(operator)) {
       prompt(messages('invalidOperator', language));
+      operator = READLINE.question();
     } else {
       break;
     }
@@ -77,8 +76,7 @@ function retrieveOperator() {
 }
 
 function checkZeroDivisor(num2, op) {
-  let checkZero;
-  checkZero = false;
+  let checkZero = false;
 
   if (/^0*$/.test(num2) && op === '4') {
     console.clear();
