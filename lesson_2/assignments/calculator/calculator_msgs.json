@@ -9,8 +9,7 @@
     "invalidOperator": "Must choose 1, 2, 3 or 4",
     "results": "The result is: ",
     "invalidDivision": "You chose 4) Divide. This is an Error! You cannot divide by 0.           \n                  ↓↓↓↓↓↓↓↓",
-    "anotherCalculation": "Do you want to perform another calculation? (Y to calculate again)",
-    "invalidAnswer": "Invalid! Please enter a y/n",
+    "anotherCalculation": "Do you want to perform another calculation? (Enter Y/y to calculate again, or another key to exit)",
     "goodbye": "Thank you for using the calculator.\n \n   GOODBYE!"
   },
   "ru": {
@@ -23,8 +22,7 @@
     "invalidOperator": "Нужно выбрать 1, 2, 3 или 4",
     "invalidDivision": "Вы выбрали 4) Разделить. Ошибка! Невозможно разделить на 0.           \n              ↓↓↓↓↓↓↓↓",
     "results": "Результат: ",
-    "anotherCalculation": "Хотите выполнить еще один расчет? (Y рассчитать еще раз)",
-    "invalidAnswer": "Недействительным! Пожалуйста, введите y/n",
+    "anotherCalculation": "Хотите выполнить еще один расчет? (Y/y рассчитать еще раз, или другой ключ для выхода)",
     "goodbye": "Спасибо за использование калькулятора.\n \n   ДО СВИДАНИЯ!"
   }
 }

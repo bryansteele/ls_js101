@@ -26,7 +26,7 @@ function retrieveLanguage() {
   let langAnswer;
   while (true) {
     langAnswer = READLINE.question();
-    
+
     if (['1', '2'].includes(langAnswer)) {
       break;
     } else {
@@ -46,7 +46,7 @@ function retrieveNumber(numRequested) {
   console.clear();
   prompt(messages(numRequested, language));
   let number = READLINE.question();
-  
+
   while (invalidNumber(number)) {
     prompt(messages('invalidNumber', language));
     number = READLINE.question();
@@ -78,7 +78,7 @@ function retrieveOperator() {
 function checkZeroDivisor(num2, op) {
   let checkZero;
   checkZero = false;
-  
+
   if (/^0*$/.test(num2) && op === '4') {
     console.clear();
     prompt(messages('invalidDivision', language));
@@ -113,25 +113,9 @@ function displayResults(calcultaedResults) {
 }
 
 function retrievePlayAgainAnswer() {
-  let playAgainAnswer;
-  while (true) {
-    playAgainAnswer = READLINE.question().toLowerCase();
-    
-    if (['n', 'no'].includes(playAgainAnswer)) {
-      break;
-    } else if (['y', 'yes'].includes(playAgainAnswer)) {
-      console.clear();
-      break;
-    } else {
-      prompt(messages('invalidAnswer', language));
-    }
-  }
-
-  return playAgainAnswer;
-}
-
-function newCalc(answer) {
-  return ['n', 'no'].includes(answer);
+  prompt(messages('anotherCalculation', language));
+  let isYes = READLINE.question().toLowerCase();
+  return isYes.includes('y');
 }
 
 // START
@@ -153,9 +137,7 @@ while (true) {
   let results = performCalculation(number1, number2, operation);
   displayResults(results);
 
-  prompt(messages('anotherCalculation', language));
-  let anotherCalculation = retrievePlayAgainAnswer();
-  if (newCalc(anotherCalculation)) break;
+  if (!retrievePlayAgainAnswer()) break;
 }
 
 console.clear();
