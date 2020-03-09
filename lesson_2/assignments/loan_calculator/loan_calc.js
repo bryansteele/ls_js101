@@ -60,25 +60,8 @@ function displayResults(payment) {
 
 function retrieveCalculateAgain() {
   prompt(MESSAGES['anotherCalc']);
-  let calculateAgainAnswer = READLINE.question().toLowerCase();
-  
-  while (true) {
-    if (['n', 'no'].includes(calculateAgainAnswer)) {
-      break;
-    } else if (['y', 'yes'].includes(calculateAgainAnswer)) {
-      console.clear();
-      break;
-    } else {
-      prompt(MESSAGES['invalidAnswer']);
-      calculateAgainAnswer = READLINE.question().toLowerCase();
-    }
-  }
-
-  return calculateAgainAnswer;
-}
-
-function exitCalculator(answer) {
-  return (['no', 'n'].includes(answer));
+  let isYes = READLINE.question().toLowerCase();
+  return isYes.includes('y');
 }
 
 // START
@@ -94,8 +77,7 @@ while (true) {
 
   displayResults(monthlyPayment);
 
-  let anotherCalculation = retrieveCalculateAgain();
-  if (exitCalculator(anotherCalculation)) break;
+  if (retrieveCalculateAgain()) break;
 }
 
 console.clear();
