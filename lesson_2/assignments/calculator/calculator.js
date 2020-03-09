@@ -92,7 +92,7 @@ function performCalculation(num1, num2, operator) {
   let result;
   switch (operator) {
     case '1':
-      result = num1 + num2;
+      result = Number(num1) + Number(num2);
       break;
     case '2':
       result = num1 - num2;
@@ -115,7 +115,7 @@ function displayResults(calcultaedResults) {
 function retrievePlayAgainAnswer() {
   let playAgainAnswer;
   while (true) {
-    playAgainAnswer = READLINE.question().toLocaleLowerCase();
+    playAgainAnswer = READLINE.question().toLowerCase();
     
     if (['n', 'no'].includes(playAgainAnswer)) {
       break;
