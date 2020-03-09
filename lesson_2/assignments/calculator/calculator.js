@@ -63,6 +63,7 @@ function invalidOperator(operator) {
 function retrieveOperator() {
   prompt(messages('operatorPrompt', language));
   let operator = READLINE.question();
+  
   while (true) {
     if (invalidOperator(operator)) {
       prompt(messages('invalidOperator', language));
