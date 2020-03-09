@@ -15,8 +15,10 @@ function prompt(message) {
 function changeLanguage(langNum) {
   if (langNum === '2') {
     language = 'ru';
+    console.clear();
   } else {
     langNum = '1';
+    console.clear();
   }
 
   return langNum;
@@ -43,7 +45,6 @@ function invalidNumber(number) {
 }
 
 function retrieveNumber(numRequested) {
-  console.clear();
   prompt(messages(numRequested, language));
   let number = READLINE.question();
 
