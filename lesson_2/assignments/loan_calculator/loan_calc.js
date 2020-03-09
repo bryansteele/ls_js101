@@ -5,9 +5,9 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function invalidNumber(number) {
-  return number.trimStart() === '' || Number.isNaN(Number(number));
-}
+// function invalidNumber(number) {
+//   return number.trimStart() === '' || Number.isNaN(Number(number)) || Number(number) < 0;
+// }
 
 function retrieveLoanAmount() {
   prompt(MESSAGES['loanAmount']);
@@ -62,20 +62,23 @@ function retrieveCalculateAgain() {
   prompt(MESSAGES['anotherCalc']);
   let calculateAgainAnswer = READLINE.question().toLowerCase();
   
-  if (['n', 'no'].includes(calculateAgainAnswer)) {
-    return;
-  } else if (['y', 'yes'].includes(calculateAgainAnswer)) {
-    console.clear();
-    return;
-  } else {
-    prompt(MESSAGES['invalidAnswer']);
+  while (true) {
+    if (['n', 'no'].includes(calculateAgainAnswer)) {
+      break;
+    } else if (['y', 'yes'].includes(calculateAgainAnswer)) {
+      console.clear();
+      break;
+    } else {
+      prompt(MESSAGES['invalidAnswer']);
+      calculateAgainAnswer = READLINE.question().toLowerCase();
+    }
   }
 
   return calculateAgainAnswer;
 }
 
 function exitCalculator(answer) {
-  return (!['no', 'n'].includes(answer));
+  return (['no', 'n'].includes(answer));
 }
 
 // START
