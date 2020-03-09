@@ -7,7 +7,6 @@
   "durationInMonths": "What is the duration of the loan, in months? (whole numbers only):",
   "invalidDuration": "Invalid duration entry. Please enter the loan term, in months:",
   "results": "Thank You!\n=> Your monthly payment will be: $",
-  "anotherCalc": "Do you want to perform another calculation? (Y/N)",
-  "invalidAnswer": "Invalid! Please enter a y/n",
+  "anotherCalc": "Enter Y/y for another calculation, or any other key to exit.)",
   "goodbye": "Thank you for using my LOAN CALCULATOR.\n   GOODBYE!!"
 }
