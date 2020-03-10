@@ -1,18 +1,18 @@
 const MESSAGES = require('./loan_calc_msgs.json');
-const READLINE = require('readline-sync')
+const READLINE = require('readline-sync');
 
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
 function invalidLoanAmount(numberAmount) {
-  return numberAmount.trimStart() === '' || Number.isNaN(Number(numberAmount)) || Number(numberAmount) < 0;
-  } 
+  return numberAmount.trimStart() === '' || Number.isNaN(Number(numberAmount)) || Number(numberAmount) <= 0;
+}
 
 function retrieveLoanAmount() {
   prompt(MESSAGES['loanAmount']);
   let amount = READLINE.question();
-  
+
   while (invalidLoanAmount(amount)) {
     prompt(MESSAGES['invalidAmount']);
     amount = READLINE.question();
@@ -38,7 +38,7 @@ function retrieveApr() {
 }
 
 function invalidDuration(durationNumber) {
-  return durationNumber.trimStart() === '' || Number.isNaN(Number(durationNumber)) || Number(durationNumber) < 0;
+  return durationNumber.trimStart() === '' || Number.isNaN(Number(durationNumber)) || Number(durationNumber) <= 0;
 }
 
 function retrieveMonthlyLoanDuration() {
@@ -50,20 +50,25 @@ function retrieveMonthlyLoanDuration() {
     duration = READLINE.question();
   }
 
-  return duration;
+  return Math.ceil(duration * 2) / 2;
 }
 
 function calculatingPayment(amount, apr, months) {
-  let monthlyInterestRate = (apr / 12) / 100;
-  let payment = amount * (monthlyInterestRate / (1 - Math.pow((1 
-                        + monthlyInterestRate), (-months))));
-  
+  let payment;
+
+  if  (apr === 0) {
+    payment =  amount / months;
+  } else {
+    let monthlyRate = (apr / 12) / 100;
+    payment = amount * (monthlyRate / (1 - Math.pow((1
+                      + monthlyRate), (-months))));
+  }
   return payment.toFixed(2);
 }
 
-function displayResults(payment) {
+function displayResults(payment, duration) {
   console.clear();
-  prompt(MESSAGES['results'] + payment);
+  prompt(MESSAGES['results'] + duration + ` month/s\n...for a total of $${payment} per month.\n`);
 }
 
 function retrieveCalculateAgain() {
@@ -80,10 +85,10 @@ prompt(MESSAGES['welcome']);
 while (true) {
   let loanAmount = retrieveLoanAmount();
   let apr = retrieveApr();
-  let monthlyLoanDuration = retrieveMonthlyLoanDuration();
-  let monthlyPayment = calculatingPayment(loanAmount, apr, monthlyLoanDuration);
+  let monthlyDuration = retrieveMonthlyLoanDuration();
+  let monthlyPayment = calculatingPayment(+loanAmount, +apr, +monthlyDuration);
 
-  displayResults(monthlyPayment);
+  displayResults(monthlyPayment, monthlyDuration);
 
   if (!retrieveCalculateAgain()) break;
 }

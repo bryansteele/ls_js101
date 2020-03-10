@@ -4,9 +4,9 @@
   "invalidAmount": "Invalid loan amount. Please enter your loan amount:",
   "aprRequest": "What's the annual percentage rate (APR) of your loan (%)? (E.g. 4.875):",
   "invalidApr": "Invalid APR entry. Please enter the APR of the loan:",
-  "durationInMonths": "What is the duration of the loan, in months? (whole numbers only):",
+  "durationInMonths": "What is the duration of the loan, in months?",
   "invalidDuration": "Invalid duration entry. Please enter the loan term, in months:",
-  "results": "Thank You!\n=> Your monthly payment will be: $",
-  "anotherCalc": "Enter Y/y for another calculation, or any other key to exit.)",
-  "goodbye": "Thank you for using my LOAN CALCULATOR.\n   GOODBYE!!"
+  "results": "Thank You!\n\n=> You will now be enslaved for ",
+  "anotherCalc": "To calculate agin, enter 'Y', or any other key to EXIT.)",
+  "goodbye": "Thank you for using my LOAN CALCULATOR.\n\n   GOODBYE!!"
 }
