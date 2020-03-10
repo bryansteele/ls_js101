@@ -6,7 +6,9 @@ function prompt(message) {
 }
 
 function invalidNumber(numberAmount) {
-  return numberAmount.trimStart() === '' || Number.isNaN(Number(numberAmount)) || Number(numberAmount) <= 0;
+  return numberAmount.trimStart() === '' ||
+          Number.isNaN(Number(numberAmount)) ||
+          Number(numberAmount) <= 0;
 }
 
 function retrieveLoanAmount() {
@@ -22,7 +24,9 @@ function retrieveLoanAmount() {
 }
 
 function invalidApr(aprNumber) {
-  return aprNumber.trimStart() === '' || Number.isNaN(Number(aprNumber)) || Number(aprNumber) < 0;
+  return aprNumber.trimStart() === '' ||
+          Number.isNaN(Number(aprNumber)) ||
+          Number(aprNumber) < 0;
 }
 
 function retrieveApr() {
@@ -64,7 +68,8 @@ function calculatingPayment(amount, apr, months) {
 
 function displayResults(payment, duration) {
   console.clear();
-  prompt(MESSAGES['results'] + duration + ` month/s\n...for a total of $${payment} per month.\n`);
+  prompt(MESSAGES['results'] + duration +
+        ` month/s\n...for a total of $${payment} per month.\n`);
 }
 
 function retrieveCalculateAgain() {
