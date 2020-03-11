@@ -9,7 +9,7 @@ function displayWinner(choice, computerChoice) {
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
 
   if ((choice === 'rock' && computerChoice === 'scissors') ||
-      (choice === 'paper' && computerChoice == 'rock') ||
+      (choice === 'paper' && computerChoice === 'rock') ||
       (choice === 'scissors' && computerChoice === 'paper')) {
     prompt('You Win!');
   } else if ((choice === 'rock' && computerChoice === 'paper') ||
@@ -42,6 +42,6 @@ while (true) {
     answer = READLINE.question().toLowerCase();
   }
 
-  if (answer[0] != 'y') break;
+  if (answer[0] !== 'y') break;
 }
 
