@@ -1,0 +1,28 @@
+{
+  "welcome": "Welcome to ROCK, PAPER, SCISSORS, SPOCK & LIZARD!\n \n ",
+  "instructions": "INSTRUCTIONS: To play this game, we will use the following keys:\n(r) for ROCK,\n(p) for PAPER,\n(s) for SCISSORS,\n(k) for SPOCK\n(l) for LIZARD.\n\n...The first to reach 5 is the GRAND WINNER!\n\n\n=> PRESS ENTER to BEGIN",
+  "invalidEnterKey": "Invalid key! Please PRESS ENTER to begin.",
+  "playerChoice": "ROCK >>> PAPER >>> SCISSORS...Choose NOW!(r, p, s, k, l):",
+  "invalidChoice": "That's not a valid choice. Please ENTER r, p, s, k or l:",
+
+  "scissorsPaper": "SCISSORS cuts PAPER!\n ",
+  "paperRock": "PAPER covers ROCK!\n ",
+  "rockLizard": "ROCK crushes LIZARD!\n ",
+  "lizardSpock": "LIZARD poisons SPOCK!\n ",
+  "spockScissors": "SPOCK smashes SCISSORS!\n ",
+  "scissorsLizard": "SCISSORS decapitates LIZARD!\n ",
+  "lizardPaper": "LIZARD eats PAPER!\n ",
+  "paperSpock": "PAPER disproves SPOCK!\n ",
+  "spockRock": "SPOCK vaporizes ROCK!\n ",
+  "rockScissors": "ROCK crushes SCISSORS!\n ",
+
+  "winner": "YOU WIN!\n ",
+  "looser": "I WIN!\n ",
+  "tie": "WE TIED!\n ",
+  "gameOver": "GAME OVER!\n ",
+  "playerWon": "YOU ARE the GRAND WINNER! CONGRATULATIONS!\n ",
+  "computerWon": "I AM the GRAND WINNER! Better Luck Next Time.\n \n ",
+  "anotherRound": "Would you like to play another round? (Y/N)",
+  "invalidAnswer": "Invalid! Please enter a y/n",
+  "goodbye": "Thank you for playing with me...GOODBYE!"
+}
