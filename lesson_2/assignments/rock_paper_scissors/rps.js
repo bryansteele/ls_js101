@@ -27,7 +27,7 @@ function instructionalGreetingPrompt() {
 }
 
 function invalidEnterKey(key) {
-  return key < 18;
+  return +key < +18;
 }
 
 function promptUserToBegin() {
@@ -52,34 +52,81 @@ function retrievePlayerChoice() {
       playerChoice = READLINE.question();
     }
 
-    return playerChoice;
+    return playerChoice = VALID_CHOICES[playerChoice];
 }
 
 function retrieveComputerChoice() {
-  let randomIndex = Math.floor(Math.random() * Object.keys(VALID_CHOICES).length);
-  return computerChoice = Object.keys(VALID_CHOICES)[randomIndex];
+  let randomIndex = Math.floor(Math.random() * Object.values(VALID_CHOICES).length);
+  return computerChoice = Object.values(VALID_CHOICES)[randomIndex];
 }
 
 function displayChoices(playerPix, computerPix) {
   console.clear();
-  prompt(`You Chose: ${playerPix.toUpperCase()}...\n=> I Chose: ${computerPix.toUpperCase()}\n`);
+  prompt(`You Chose: ${playerPix.toUpperCase()}...\n=>  I Chose : ${computerPix.toUpperCase()}\n`);
 }
 
-// function displayWinner(choice, computerChoice) {
-//   
+function validateWinnerOfRound(player, computer) {
+  return WINNING_VARIATIONS[player].includes(computer);
+}
 
-//   if ((choice === 'rock' && computerChoice === 'scissors') ||
-//       (choice === 'paper' && computerChoice === 'rock') ||
-//       (choice === 'scissors' && computerChoice === 'paper')) {
-//     prompt('You Win!');
-//   } else if ((choice === 'rock' && computerChoice === 'paper') ||
-//             (choice === 'paper' && computerChoice === 'scissors') ||
-//             (choice === 'scissors' && computerChoice === 'rock')) {
-//     prompt('Computer Wins!');
-//   } else {
-//     prompt("It's a tie!");
-//   }
-// }
+function displayWinnerOfRound(player, computer) {
+  if (validateWinnerOfRound(player, computer)){
+    prompt(MESSAGES[player + computer]);
+    prompt(MESSAGES['winner']);
+  } else if (validateWinnerOfRound(computer, player)) {
+    prompt(MESSAGES[computer + player]);
+    prompt(MESSAGES['looser']);
+  } else {
+    prompt(MESSAGES['tie']);
+  }
+}
+
+function incrementScore(player, computer, scores) {
+  if (validateWinnerOfRound(player, computer)) {
+    scores.player += 1;
+  } else if (validateWinnerOfRound(computer, player)) {
+    scores.computer += 1;
+  }
+  
+  return scores;
+}
+
+  function displayIncrementalScores(incScores) {
+    prompt(`Your Score: ${incScores.player}  My Score: ${incScores.computer}\n \n`);
+  }
+
+  function establishGrandWinner(scores) {
+    let winner;
+    if (scores.player === 5 && scores.computer !== 5) {
+      return winner = true;
+    } else if (scores.computer === 5 && scores.player !== 5) {
+      return winner = false;
+    }
+    
+    return winner;
+  }
+
+  function displayGrandWinner(winner, score) {
+    console.clear();
+    prompt(MESSAGES['gameOver']);
+    prompt(`You...${score.player}  Me...${score.computer}\n\n`);
+
+    if (winner === true) {
+      prompt(MESSAGES['playerWon']);
+    } else {
+      prompt(MESSAGES['computerWon']);
+    }
+  }
+
+  function gameOver(score) {
+    return score.player === WINNING_MATCH || score.computer === WINNING_MATCH;
+  }
+
+  function retrieveAnotherRound() {
+    prompt(MESSAGES['anotherRound']);
+    let isYes = READLINE.question().toLowerCase();
+    return isYes.includes('y');
+  }
 
 // START
 instructionalGreetingPrompt();
@@ -88,26 +135,25 @@ console.clear();
 
 // MAIN LOOP
 while (true) {
-  scores = { player: 0, computer: 0 };
+  let scoreBoard = { player: 0, computer: 0 };
 
   while (true) {
     let playerChoice = retrievePlayerChoice();
     let computerChoice = retrieveComputerChoice();
 
     displayChoices(playerChoice, computerChoice);
+    displayWinnerOfRound(playerChoice, computerChoice);
 
-
-
-
-    // displayWinner(choice, computerChoice);
-
-    // prompt('Do you want to play again? (y/n):');
-    // let answer = READLINE.question().toLowerCase();
-    // while (answer[0] !== 'n' && answer[0] !== 'y') {
-    //   prompt('Please enter "y" or "n".');
-    //   answer = READLINE.question().toLowerCase();
-    // }
-
-    // if (answer[0] !== 'y') break;
+    incrementScore(playerChoice, computerChoice, scoreBoard);
+    displayIncrementalScores(scoreBoard);
+    
+    if (gameOver(scoreBoard)) break;
   }
+
+  displayGrandWinner(establishGrandWinner(scoreBoard), scoreBoard);
+
+  if (!retrieveAnotherRound()) break;
 }
+
+console.clear();
+prompt(MESSAGES['goodbye']);
