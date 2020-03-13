@@ -1,13 +1,20 @@
 const MESSAGES = require('./rps_msgs.json');
 const READLINE = require('readline-sync');
 const WINNING_MATCH = 5;
-const VALID_CHOICES = {
-  r: 'rock',
-  p: 'paper',
-  s: 'scissors',
-  k: 'spock',
-  l: 'lizard'
-};
+const VALID_USER_CHOICES = [
+  'r',
+  'p',
+  's',
+  'k',
+  'l'
+]
+const VALID_CHOICES = [
+  'rock',
+  'paper',
+  'scissors',
+  'spock',
+  'lizard'
+];
 const WINNING_VARIATIONS = {
   rock: ['scissors', 'lizard'],
   paper: ['rock', 'spock'],
