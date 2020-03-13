@@ -7,14 +7,14 @@ const VALID_CHOICES = {
   s: 'scissors',
   k: 'spock',
   l: 'lizard'
-}
+};
 const WINNING_VARIATIONS = {
   rock: ['scissors', 'lizard'],
   paper: ['rock', 'spock'],
   scissors: ['paper', 'lizard'],
   spock: ['rock', 'scissors'],
   lizard: ['paper', 'spock']
-}
+};
 
 function prompt(message) {
   console.log(`=> ${message}`);
@@ -27,37 +27,40 @@ function instructionalGreetingPrompt() {
 }
 
 function invalidEnterKey(key) {
-  return +key < +18;
+  return key.charCodeAt('\n');
 }
 
 function promptUserToBegin() {
-  let age = READLINE.question();
+  let isEnter = READLINE.question();
 
-  while (invalidEnterKey(age)) {
+  while (invalidEnterKey(isEnter)) {
     prompt(MESSAGES['invalidEnterKey']);
-    age = READLINE.question();
+    isEnter = READLINE.question();
   }
 }
 
 function invalidPlayerChoice(choice) {
-  return !Object.keys(VALID_CHOICES).includes(choice)
+  return !Object.keys(VALID_CHOICES).includes(choice);
 }
 
 function retrievePlayerChoice() {
   prompt(MESSAGES['playerChoice']);
-  playerChoice = READLINE.question();
+  let playChoice = READLINE.question();
 
-    while (invalidPlayerChoice(playerChoice)) {
-      prompt(MESSAGES['invalidChoice']);
-      playerChoice = READLINE.question();
-    }
+  while (invalidPlayerChoice(playChoice)) {
+    prompt(MESSAGES['invalidChoice']);
+    playChoice = READLINE.question();
+    playChoice = VALID_CHOICES[playChoice];
+  }
 
-    return playerChoice = VALID_CHOICES[playerChoice];
+  return playChoice;
 }
 
 function retrieveComputerChoice() {
-  let randomIndex = Math.floor(Math.random() * Object.values(VALID_CHOICES).length);
-  return computerChoice = Object.values(VALID_CHOICES)[randomIndex];
+  let randomIndex = Math.floor(Math.random() *
+                    Object.values(VALID_CHOICES).length);
+  let compChoice = Object.values(VALID_CHOICES)[randomIndex];
+  return compChoice;
 }
 
 function displayChoices(playerPix, computerPix) {
@@ -70,7 +73,7 @@ function validateWinnerOfRound(player, computer) {
 }
 
 function displayWinnerOfRound(player, computer) {
-  if (validateWinnerOfRound(player, computer)){
+  if (validateWinnerOfRound(player, computer)) {
     prompt(MESSAGES[player + computer]);
     prompt(MESSAGES['winner']);
   } else if (validateWinnerOfRound(computer, player)) {
@@ -87,22 +90,22 @@ function incrementScore(player, computer, scores) {
   } else if (validateWinnerOfRound(computer, player)) {
     scores.computer += 1;
   }
-  
+
   return scores;
 }
 
   function displayIncrementalScores(incScores) {
-    prompt(`Your Score: ${incScores.player}  My Score: ${incScores.computer}\n \n`);
+    prompt(`Your Score: ${incScores.player}  My Score: ${incScores.computer}\n\n=> Lets keep going!`);
   }
 
   function establishGrandWinner(scores) {
     let winner;
     if (scores.player === 5 && scores.computer !== 5) {
-      return winner = true;
+      winner = true;
     } else if (scores.computer === 5 && scores.player !== 5) {
-      return winner = false;
+      winner = false;
     }
-    
+
     return winner;
   }
 
@@ -146,13 +149,14 @@ while (true) {
 
     incrementScore(playerChoice, computerChoice, scoreBoard);
     displayIncrementalScores(scoreBoard);
-    
+
     if (gameOver(scoreBoard)) break;
   }
 
   displayGrandWinner(establishGrandWinner(scoreBoard), scoreBoard);
 
   if (!retrieveAnotherRound()) break;
+  console.clear();
 }
 
 console.clear();
