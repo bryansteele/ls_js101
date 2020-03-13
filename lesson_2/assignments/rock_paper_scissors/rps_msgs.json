@@ -24,6 +24,6 @@
   "playerWon": "YOU ARE the GRAND WINNER! CONGRATULATIONS!\n ",
   "computerWon": "I AM the GRAND WINNER! Better Luck Next Time.\n \n ",
 
-  "anotherRound": "Would you like to play another round? ENTER (Y) to play again, or any other key to exit.",
+  "anotherRound": "ENTER (Y) to play again, or any other key to exit.",
   "goodbye": "Thank you for playing with me...GOODBYE!"
 }

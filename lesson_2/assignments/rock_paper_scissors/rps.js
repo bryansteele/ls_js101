@@ -40,7 +40,7 @@ function promptUserToBegin() {
 }
 
 function invalidPlayerChoice(choice) {
-  !Object.keys(VALID_CHOICES).includes(choice)
+  return !Object.keys(VALID_CHOICES).includes(choice)
 }
 
 function retrievePlayerChoice() {
