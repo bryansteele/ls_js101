@@ -5,22 +5,22 @@ const VALID_USER_CHOICES = [
   'r',
   'p',
   's',
-  'k',
-  'l'
+  'l',
+  'k'
 ];
 const VALID_CHOICES = [
   'rock',
   'paper',
   'scissors',
-  'spock',
-  'lizard'
+  'lizard',
+  'spock'
 ];
 const WINNING_VARIATIONS = {
   rock: ['scissors', 'lizard'],
   paper: ['rock', 'spock'],
   scissors: ['paper', 'lizard'],
-  spock: ['rock', 'scissors'],
-  lizard: ['paper', 'spock']
+  lizard: ['paper', 'spock'],
+  spock: ['rock', 'scissors']
 };
 
 let prompt = (message) => console.log(`=> ${message}`);
@@ -67,11 +67,11 @@ function convertUserChoiceToValidChoice(choice) {
     case 's':
       choice = 'scissors';
       break;
-      case 'k':
-        choice = 'spock';
+      case 'l':
+        choice = 'lizard';
         break;
-    case 'l':
-      choice = 'lizard';
+    case 'k':
+      choice = 'spock';
       break;
   }
   return choice;
@@ -132,7 +132,7 @@ function incrementScore(player, computer, scores) {
   function displayGrandWinner(winner, score) {
     console.clear();
     prompt(MESSAGES['gameOver']);
-    prompt(`Your Score...${score.player}  My Score...${score.computer}\n\n`);
+    prompt(`Your Score: ${score.player}  My Score: ${score.computer}\n\n`);
 
     if (winner === true) {
       prompt(MESSAGES['playerWon']);
