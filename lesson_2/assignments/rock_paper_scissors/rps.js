@@ -115,7 +115,7 @@ function incrementScore(player, computer, scores) {
 }
 
   function displayIncrementalScores(incScores) {
-    prompt(`Your Score: ${incScores.player}  My Score: ${incScores.computer}\n\n=> Lets keep going!`);
+    prompt(`YOU: ${incScores.player}  ME: ${incScores.computer}\n\n=> Lets keep going!`);
   }
 
   function establishGrandWinner(scores) {
@@ -132,7 +132,7 @@ function incrementScore(player, computer, scores) {
   function displayGrandWinner(winner, score) {
     console.clear();
     prompt(MESSAGES['gameOver']);
-    prompt(`You...${score.player}  Me...${score.computer}\n\n`);
+    prompt(`Your Score...${score.player}  My Score...${score.computer}\n\n`);
 
     if (winner === true) {
       prompt(MESSAGES['playerWon']);
