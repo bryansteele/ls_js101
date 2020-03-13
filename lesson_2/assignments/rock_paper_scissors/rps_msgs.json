@@ -1,6 +1,6 @@
 {
   "welcome": "Welcome to ROCK, PAPER, SCISSORS, SPOCK & LIZARD!\n \n ",
-  "instructions": "INSTRUCTIONS: To play this game, we will use the following keys:\n(r) for ROCK,\n(p) for PAPER,\n(s) for SCISSORS,\n(k) for SPOCK\n(l) for LIZARD.\n\n...The first to reach 5 is the GRAND WINNER!\n\n\n=> PRESS ENTER to BEGIN",
+  "instructions": "INSTRUCTIONS: To play this game, you will use the following keys:\n(r) for ROCK,\n(p) for PAPER,\n(s) for SCISSORS,\n(k) for SPOCK\n(l) for LIZARD.\n\n...The first to reach 5 is the GRAND WINNER!\n\n\n=> PRESS ENTER to BEGIN",
   "invalidEnterKey": "Invalid key! Please PRESS ENTER to begin.",
   "playerChoice": "ROCK >>> PAPER >>> SCISSORS...Choose NOW!(r, p, s, k, l):",
   "invalidChoice": "That's not a valid choice. Please ENTER r, p, s, k or l:",
