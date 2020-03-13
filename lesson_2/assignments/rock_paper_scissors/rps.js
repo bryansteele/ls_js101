@@ -7,7 +7,7 @@ const VALID_USER_CHOICES = [
   's',
   'k',
   'l'
-]
+];
 const VALID_CHOICES = [
   'rock',
   'paper',
@@ -47,26 +47,45 @@ function promptUserToBegin() {
 }
 
 function invalidPlayerChoice(choice) {
-  return !Object.keys(VALID_CHOICES).includes(choice);
+  return !VALID_USER_CHOICES.includes(choice);
 }
 
 function retrievePlayerChoice() {
   prompt(MESSAGES['playerChoice']);
-  let playChoice = READLINE.question();
+  let playChoice = READLINE.question().toLowerCase();
 
   while (invalidPlayerChoice(playChoice)) {
     prompt(MESSAGES['invalidChoice']);
-    playChoice = READLINE.question();
+    playChoice = READLINE.question().toLowerCase();
   }
 
-  playChoice = VALID_CHOICES[playChoice];
-  return playChoice;
+  return convertUserChoiceToValidChoice(playChoice);
+}
+
+function convertUserChoiceToValidChoice(choice) {
+  switch (choice) {
+    case 'r':
+      choice = 'rock';
+      break;
+    case 'p':
+      choice = 'paper';
+      break;
+    case 's':
+      choice = 'scissors';
+      break;
+      case 'k':
+        choice = 'spock';
+        break;
+    case 'l':
+      choice = 'lizard';
+      break;
+  }
+  return choice;
 }
 
 function retrieveComputerChoice() {
-  let randomIndex = Math.floor(Math.random() *
-                    Object.values(VALID_CHOICES).length);
-  let compChoice = Object.values(VALID_CHOICES)[randomIndex];
+  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
+  let compChoice = String(VALID_CHOICES[randomIndex]);
   return compChoice;
 }
 
