@@ -6,36 +6,36 @@ function prompt(message) {
 }
 
 function invalidNumber(numberAmount) {
-  return numberAmount.trimStart() === '' ||
+  return String(numberAmount).trimStart() === '' ||
           Number.isNaN(Number(numberAmount)) ||
           Number(numberAmount) <= 0;
 }
 
 function retrieveLoanAmount() {
   prompt(MESSAGES['loanAmount']);
-  let amount = READLINE.question();
+  let amount = Number(READLINE.question());
 
   while (invalidNumber(amount)) {
     prompt(MESSAGES['invalidAmount']);
-    amount = READLINE.question();
+    amount = Number(READLINE.question());
   }
 
   return amount;
 }
 
 function invalidApr(aprNumber) {
-  return aprNumber.trimStart() === '' ||
+  return String(aprNumber).trimStart() === '' ||
           Number.isNaN(Number(aprNumber)) ||
           Number(aprNumber) < 0;
 }
 
 function retrieveApr() {
   prompt(MESSAGES['aprRequest']);
-  let requestedApr = READLINE.question();
+  let requestedApr = Number(READLINE.question());
 
   while (invalidApr(requestedApr)) {
     prompt(MESSAGES['invalidApr']);
-    requestedApr = READLINE.question();
+    requestedApr = Number(READLINE.question());
   }
 
   return requestedApr;
@@ -43,11 +43,11 @@ function retrieveApr() {
 
 function retrieveMonthlyLoanDuration() {
   prompt(MESSAGES['durationInMonths']);
-  let duration = READLINE.question();
+  let duration = Number(READLINE.question());
 
   while (invalidNumber(duration)) {
     prompt(MESSAGES['invalidDuration']);
-    duration = READLINE.question();
+    duration = Number(READLINE.question());
   }
 
   return Math.ceil(duration * 2) / 2;
@@ -87,7 +87,7 @@ while (true) {
   let loanAmount = retrieveLoanAmount();
   let apr = retrieveApr();
   let monthlyDuration = retrieveMonthlyLoanDuration();
-  let monthlyPayment = calculatingPayment(+loanAmount, +apr, +monthlyDuration);
+  let monthlyPayment = calculatingPayment(loanAmount, apr, monthlyDuration);
 
   displayResults(monthlyPayment, monthlyDuration);
 
