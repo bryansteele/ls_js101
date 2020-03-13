@@ -23,9 +23,7 @@ const WINNING_VARIATIONS = {
   lizard: ['paper', 'spock']
 };
 
-function prompt(message) {
-  console.log(`=> ${message}`);
-}
+let prompt = (message) => console.log(`=> ${message}`);
 
 function instructionalGreetingPrompt() {
   console.clear();
@@ -33,9 +31,7 @@ function instructionalGreetingPrompt() {
   prompt(MESSAGES['instructions']);
 }
 
-function invalidEnterKey(key) {
-  return key.charCodeAt('\n');
-}
+let invalidEnterKey = (key) => key.charCodeAt('\n');
 
 function promptUserToBegin() {
   let isEnter = READLINE.question();
@@ -46,9 +42,7 @@ function promptUserToBegin() {
   }
 }
 
-function invalidPlayerChoice(choice) {
-  return !VALID_USER_CHOICES.includes(choice);
-}
+let invalidPlayerChoice = (choice) => !VALID_USER_CHOICES.includes(choice);
 
 function retrievePlayerChoice() {
   prompt(MESSAGES['playerChoice']);
@@ -147,9 +141,8 @@ function incrementScore(player, computer, scores) {
     }
   }
 
-  function gameOver(score) {
-    return score.player === WINNING_MATCH || score.computer === WINNING_MATCH;
-  }
+  let gameOver = (score) => score.player === WINNING_MATCH ||
+                            score.computer === WINNING_MATCH;
 
   function retrieveAnotherRound() {
     prompt(MESSAGES['anotherRound']);
@@ -166,7 +159,7 @@ console.clear();
 while (true) {
   let scoreBoard = { player: 0, computer: 0 };
 
-  while (true) {
+  do {
     let playerChoice = retrievePlayerChoice();
     let computerChoice = retrieveComputerChoice();
 
@@ -176,8 +169,7 @@ while (true) {
     incrementScore(playerChoice, computerChoice, scoreBoard);
     displayIncrementalScores(scoreBoard);
 
-    if (gameOver(scoreBoard)) break;
-  }
+  } while (!gameOver(scoreBoard));
 
   displayGrandWinner(establishGrandWinner(scoreBoard), scoreBoard);
 
