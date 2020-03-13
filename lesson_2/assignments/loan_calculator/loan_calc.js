@@ -92,6 +92,7 @@ while (true) {
   displayResults(monthlyPayment, monthlyDuration);
 
   if (!retrieveCalculateAgain()) break;
+  console.clear();
 }
 
 console.clear();
