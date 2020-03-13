@@ -50,9 +50,9 @@ function retrievePlayerChoice() {
   while (invalidPlayerChoice(playChoice)) {
     prompt(MESSAGES['invalidChoice']);
     playChoice = READLINE.question();
-    playChoice = VALID_CHOICES[playChoice];
   }
 
+  playChoice = VALID_CHOICES[playChoice];
   return playChoice;
 }
 
