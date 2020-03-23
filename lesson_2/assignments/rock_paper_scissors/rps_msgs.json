@@ -2,7 +2,7 @@
   "welcome": "Welcome to ROCK, PAPER, SCISSORS, LIZARD & SPOCK!\n \n ",
   "instructions": "INSTRUCTIONS: To play this game, you will use the following keys:\n(r) for ROCK,\n(p) for PAPER,\n(s) for SCISSORS,\n(l) for LIZARD\n(k) for SPOCK.\n\n...The first to reach 5 is the GRAND WINNER!\n\n\n=> PRESS ENTER to BEGIN",
   "invalidEnterKey": "Invalid key! Please PRESS ENTER to begin.",
-  "playerChoice": "ROCK >>> PAPER >>> SCISSORS >>> LIZARD...Choose NOW!(r, p, s, l, k):",
+  "playerChoice": "ROCK >>> PAPER >>> SCISSORS >>> LIZARD >>> SPOCK...\n\n(r) for ROCK,\n(p) for PAPER,\n(s) for SCISSORS,\n(l) for LIZARD\n(k) for SPOCK.\n\nChoose NOW! ",
   "invalidChoice": "That's not a valid choice. Please ENTER r, p, s, l or k:",
 
   "scissorspaper": "SCISSORS cuts PAPER!\n ",

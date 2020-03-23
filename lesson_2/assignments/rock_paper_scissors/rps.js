@@ -15,7 +15,7 @@ const VALID_CHOICES = [
   'lizard',
   'spock'
 ];
-const WINNING_VARIATIONS = {
+const WIN_VARIATIONS = {
   rock: ['scissors', 'lizard'],
   paper: ['rock', 'spock'],
   scissors: ['paper', 'lizard'],
@@ -41,6 +41,8 @@ function promptUserToBegin() {
     isEnter = READLINE.question();
   }
 }
+
+let initializeScore = () => ({ player: 0, computer: 0 });
 
 let invalidPlayerChoice = (choice) => !VALID_USER_CHOICES.includes(choice);
 
@@ -88,15 +90,15 @@ function displayChoices(playerPix, computerPix) {
   prompt(`You Chose: ${playerPix.toUpperCase()}...\n=>  I Chose : ${computerPix.toUpperCase()}\n`);
 }
 
-function validateWinnerOfRound(player, computer) {
-  return WINNING_VARIATIONS[player].includes(computer);
-}
+let hasPlayerWonRound = (play, comp) => WIN_VARIATIONS[play].includes(comp);
+
+let hasCompWonRound = (play, comp) => WIN_VARIATIONS[play].includes(comp);
 
 function displayWinnerOfRound(player, computer) {
-  if (validateWinnerOfRound(player, computer)) {
+  if (hasPlayerWonRound(player, computer)) {
     prompt(MESSAGES[player + computer]);
     prompt(MESSAGES['winner']);
-  } else if (validateWinnerOfRound(computer, player)) {
+  } else if (hasCompWonRound(computer, player)) {
     prompt(MESSAGES[computer + player]);
     prompt(MESSAGES['looser']);
   } else {
@@ -105,9 +107,9 @@ function displayWinnerOfRound(player, computer) {
 }
 
 function incrementScore(player, computer, scores) {
-  if (validateWinnerOfRound(player, computer)) {
+  if (hasPlayerWonRound(player, computer)) {
     scores.player += 1;
-  } else if (validateWinnerOfRound(computer, player)) {
+  } else if (hasCompWonRound(computer, player)) {
     scores.computer += 1;
   }
 
@@ -118,7 +120,7 @@ function incrementScore(player, computer, scores) {
     prompt(`YOU: ${incScores.player}  ME: ${incScores.computer}\n\n=> Lets keep going!`);
   }
 
-  function establishGrandWinner(scores) {
+  function isGrandWinner(scores) {
     let winner;
     if (scores.player === 5 && scores.computer !== 5) {
       winner = true;
@@ -141,10 +143,10 @@ function incrementScore(player, computer, scores) {
     }
   }
 
-  let gameOver = (score) => score.player === WINNING_MATCH ||
+  let isGameOver = (score) => score.player === WINNING_MATCH ||
                             score.computer === WINNING_MATCH;
 
-  function retrieveAnotherRound() {
+  function isAnotherRound() {
     prompt(MESSAGES['anotherRound']);
     let isYes = READLINE.question().toLowerCase();
     return isYes.includes('y');
@@ -157,8 +159,7 @@ console.clear();
 
 // MAIN LOOP
 while (true) {
-  let scoreBoard = { player: 0, computer: 0 };
-
+  let scoreBoard = initializeScore();
   do {
     let playerChoice = retrievePlayerChoice();
     let computerChoice = retrieveComputerChoice();
@@ -169,11 +170,11 @@ while (true) {
     incrementScore(playerChoice, computerChoice, scoreBoard);
     displayIncrementalScores(scoreBoard);
 
-  } while (!gameOver(scoreBoard));
+  } while (!isGameOver(scoreBoard));
 
-  displayGrandWinner(establishGrandWinner(scoreBoard), scoreBoard);
+  displayGrandWinner(isGrandWinner(scoreBoard), scoreBoard);
 
-  if (!retrieveAnotherRound()) break;
+  if (!isAnotherRound()) break;
   console.clear();
 }
 
